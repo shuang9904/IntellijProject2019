@@ -3,43 +3,41 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
-
-
+import javax.swing.*;
 public class MainMenu {
     private JButton exitButton;
-    private JPanel MainMenu;
+    private JPanel mainMenu;
     private JButton startButton;
     private JButton historyButton;
 
     public MainMenu() {
-        exitButton.addActionListener(new ActionListener() {
+        JFrame frame = new JFrame("Main Menu");
+        ///// mainMenu IS ALWAYS NULL WITHOUT THE NEXT LINE!!!
+        frame.setContentPane(this.mainMenu);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(500, 500));
+        frame.pack();
+        frame.setVisible(true);
 
+        exitButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int exitButton = JOptionPane.YES_NO_OPTION;
+                 int exitButton = JOptionPane.YES_NO_OPTION;
 
                 exitButton = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Warning", JOptionPane.YES_NO_OPTION);
-                if (exitButton == JOptionPane.YES_OPTION) {
+                if (exitButton == JOptionPane.YES_OPTION)
+                {
                     System.exit(0);
-                } else {
-
                 }
 
             }
         });
     }
 
-    //Main Menu GUI setup
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Main Menu");
-        frame.setContentPane(new MainMenu().MainMenu);
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(500, 500));
-        frame.pack();
-        frame.setVisible(true);
+    public void tutorial(){
+      JOptionPane.showMessageDialog(null,"In this game , we have 3 elements \n Fire   Water    Nature\n\n You have to pick 1 from the elements "+
+                      "to fight with a random elements choosen by the enemy to win\n\nThe condition to win \n- Fire perish Nature\n-Water perish Fire\n-Nature perish Water",
+              "Tutorial",JOptionPane.INFORMATION_MESSAGE);
     }
-
-
-
 }
