@@ -8,7 +8,7 @@ public class MainMenu {
     private JButton exitButton;
     private JPanel mainMenu;
     private JButton startButton;
-    private JButton historyButton;
+    private JButton gameRecordButton;
 
     public MainMenu() {
         JFrame frame = new JFrame("Main Menu");
@@ -31,6 +31,19 @@ public class MainMenu {
                     System.exit(0);
                 }
 
+            }
+        });
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game gameStart = new Game();
+
+            }
+        });
+        gameRecordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameRecord gameRecord = new GameRecord();
             }
         });
     }
