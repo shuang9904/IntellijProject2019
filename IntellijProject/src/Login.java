@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//This is the main java
+//Loads the Main menu Form
+//Loads the Game GUI
+//Loads the Record GUI
 
 
 public class Login {
