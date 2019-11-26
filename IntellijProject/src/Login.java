@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 //This is the main java
 //Loads the Main menu Form
 //Loads the Game GUI
@@ -12,17 +13,22 @@ public class Login {
         String userName;
         int option;
 
-        //This will ask user to input the username
-        userName = JOptionPane.showInputDialog(null,"Please enter your name","Welcome", JOptionPane.INFORMATION_MESSAGE);
+        //ask user to input the username
+        userName = JOptionPane.showInputDialog(null,
+                "Please enter your name","Welcome",
+                JOptionPane.INFORMATION_MESSAGE);
 
-        while(userName.length() < 3) //This is to make sure the username that user enter is more than 3 characters
+        while(userName.length() < 3) //make sure the username that user enter is more than 3 characters
         {
-            userName = JOptionPane.showInputDialog(null,"Please enter your name with more than 3 characters","Welcome", JOptionPane.ERROR_MESSAGE);
+            userName = JOptionPane.showInputDialog(null,
+                    "Please enter your name with more than 3 characters","Welcome",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
         //Display option
-        option =JOptionPane.showOptionDialog(null, "Welcome " + userName + "\n\nWould you like to have a tutorial about this game?",
-                "Welcome", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        option =JOptionPane.showOptionDialog(null,
+                "Welcome " + userName + "\n\nWould you like to have a tutorial about this game?", "Welcome",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
 
         //Ok to continue to the tutorial

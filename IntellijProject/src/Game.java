@@ -1,17 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ContainerAdapter;
+import java.awt.event.*;
 import java.lang.reflect.Array;
 import java.util.Random;
 
+
+       //This is the main game
 public class Game {
     private JPanel Game;
-    private JProgressBar progressBar1;
     private JButton Water;
     private JButton Nature;
     private JButton Fire;
+    private JLabel countDownLabel;
     private int[] choices = {0,1,2};
     private int myChoice;
     private int computerChoice;
@@ -19,9 +19,6 @@ public class Game {
 
     public Game() {
         JFrame frame = new JFrame("The Elements");
-        ///// Game IS ALWAYS NULL WITHOUT THE NEXT LINE!!!
-
-
         frame.setContentPane(this.Game);
         frame.setMinimumSize(new Dimension(500, 500));
         frame.pack();
@@ -41,7 +38,6 @@ public class Game {
                 {
                     myChoice = 0;
                     computerChoice = computerPlays();
-                    JOptionPane.showMessageDialog(null, computerChoice);
                     conditionsDisplayResults(myChoice, computerChoice);
                 }
 
@@ -58,7 +54,7 @@ public class Game {
                 {
                     myChoice = 1;
                     computerChoice = computerPlays();
-                    JOptionPane.showMessageDialog(null, computerChoice);
+
                     conditionsDisplayResults(myChoice, computerChoice);
                 }
             }
@@ -75,25 +71,42 @@ public class Game {
                 {
                     myChoice = 2;
                     computerChoice = computerPlays();
-                    JOptionPane.showMessageDialog(null, "Computer chose"+computerChoice );
                     conditionsDisplayResults(myChoice, computerChoice);
                 }
 
             }
         });
-    Game.addContainerListener(new ContainerAdapter() { } );}
+
+    Game.addContainerListener(new ContainerAdapter() { } );
+        countDownLabel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                int sec = 60;
+                sec--;
+                countDownLabel.setText("60"+sec);
+
+
+                    }
+
+                });}
+
+
+
 
     //computer chooses
-    static String computerPlays() {
+    static int computerPlays() {
         int choice;
-        String choiceAsString;
-        choiceAsString = "";
 
         choice = (int)(Math.random() * 3);
+        if(choice == 0)
+        JOptionPane.showMessageDialog(null,"Computer chose Water");
+        if(choice == 1)
+            JOptionPane.showMessageDialog(null,"Computer chose Fire");
+        if(choice == 2)
+            JOptionPane.showMessageDialog(null,"Computer chose Nature");
 
-        JOptionPane.showMessageDialog(null,choiceAsString);
-
-        return choiceAsString;
+        return choice;
 
     }
 
@@ -138,4 +151,6 @@ public class Game {
 
 
     }
+
+
 }

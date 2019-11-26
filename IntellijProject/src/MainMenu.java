@@ -36,21 +36,27 @@ public class MainMenu {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Game gameStart = new Game();
+
+
 
             }
         });
         gameRecordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 GameRecord gameRecord = new GameRecord();
             }
         });
     }
 
     public void tutorial(){
-      JOptionPane.showMessageDialog(null,"In this game , we have 3 elements \n Fire   Water    Nature\n\n You have to pick 1 from the elements "+
-                      "to fight with a random elements choosen by the enemy to win\n\nThe condition to win \n- Fire perish Nature\n-Water perish Fire\n-Nature perish Water",
+      JOptionPane.showMessageDialog(null,
+              "In this game , we have 3 elements \n Fire     Water    Nature\n\n You have to pick 1 from the elements "+
+                      "to fight with a random elements chose by the enemy to win\n\nThe condition to win \n-The Fire will perish Nature" +
+                      "\n-The Water will perish Fire\n-The Nature will perish Water",
               "Tutorial",JOptionPane.INFORMATION_MESSAGE);
     }
 }
