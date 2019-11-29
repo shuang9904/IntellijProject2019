@@ -12,9 +12,10 @@ public class Game {
     private JButton Nature;
     private JButton Fire;
     private JLabel countDownLabel;
-    private int[] choices = {0,1,2};
+    private JLabel computerScore;
     private int myChoice;
     private int computerChoice;
+            int gamePlayed = 0; //store the times of game played
 
 
     public Game() {
@@ -24,72 +25,97 @@ public class Game {
         frame.pack();
         frame.setVisible(true);
 
+                  //if the times of game played is more than 5 times , execute the following code
+                   if (gamePlayed >= 5) {
+                       GameResult();
+                       MainMenu mainMenu = new MainMenu();
+                   }
 
-        Water.addActionListener(new ActionListener() {
-            @Override
-            //Water counter Fire , Nature counter water
-            public void actionPerformed(ActionEvent e) {
-                int select;
-                select= JOptionPane.showConfirmDialog(null,
-                        "You're using the power of water", "Water",
-                        JOptionPane.YES_NO_OPTION);
+                   else{
+                       Water.addActionListener( new ActionListener()
+                       {
+                           @Override
+                           //Water counter Fire , Nature counter water
+                           public void actionPerformed( ActionEvent e )
+                           {
+                               //check if game is over
+                               int select;
+                               select = JOptionPane.showConfirmDialog( null, "You're using the power of water", "Water", JOptionPane.YES_NO_OPTION );
 
-                if(select == JOptionPane.YES_OPTION)
-                {
-                    myChoice = 0;
-                    computerChoice = computerPlays();
-                    conditionsDisplayResults(myChoice, computerChoice);
+                               if ( select == JOptionPane.YES_OPTION )
+                               {
+                                   myChoice = 0;
+                                   computerChoice = computerPlays();
+                                   conditionsDisplayResults( myChoice, computerChoice );
+
+
+                               }
+                           }
+                       } );
+
+
+                       Fire.addActionListener( new ActionListener()
+                       {
+                           @Override
+                           public void actionPerformed( ActionEvent e )
+                           {
+                               int select = JOptionPane.showConfirmDialog( null, "You're using the power of fire", "Fire", JOptionPane.YES_NO_OPTION );
+
+                               if ( select == JOptionPane.YES_OPTION )
+                               {
+                                   myChoice = 1;
+                                   computerChoice = computerPlays();
+                                   conditionsDisplayResults( myChoice, computerChoice );
+
+                               }
+                           }
+                       } );
+
+                      Nature.addActionListener( new ActionListener()
+                       {
+                           @Override
+                           public void actionPerformed( ActionEvent e )
+                           {
+                               int select = JOptionPane.showConfirmDialog( null, "You're using the power of nature", "Nature", JOptionPane.YES_NO_OPTION );
+
+                               if ( select == JOptionPane.YES_OPTION )
+                               {
+                                   myChoice = 2;
+                                   computerChoice = computerPlays();
+                                   conditionsDisplayResults( myChoice, computerChoice );
+
+                               }
+
+
+                           }
+                       } );}
+
+
+
+                   /*else{ //else which when the times of game played is more than 5 times , execute the following code
+
+                       GameResult();
+                       MainMenu mainMenu = new MainMenu();
+
+                   }*/
+    }
+            /*Game.addContainerListener(new ContainerAdapter() {
+            });
+            countDownLabel.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(ComponentEvent e) {
+                    super.componentResized(e);
+                    int sec = 60;
+                    sec--;
+                    countDownLabel.setText("60" + sec);
+
+
                 }
 
-            }
-        });
-        Fire.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int select = JOptionPane.showConfirmDialog(null,
-                        "You're using the power of fire","Fire",
-                        JOptionPane.YES_NO_OPTION);
-
-                if(select == JOptionPane.YES_OPTION)
-                {
-                    myChoice = 1;
-                    computerChoice = computerPlays();
-
-                    conditionsDisplayResults(myChoice, computerChoice);
-                }
-            }
-        });
-        Nature.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                 int select = JOptionPane.showConfirmDialog(null,
-                         "You're using the power of nature","Nature",
-                         JOptionPane.YES_NO_OPTION);
-
-                if(select == JOptionPane.YES_OPTION)
-                {
-                    myChoice = 2;
-                    computerChoice = computerPlays();
-                    conditionsDisplayResults(myChoice, computerChoice);
-                }
-
-            }
-        });
-
-    Game.addContainerListener(new ContainerAdapter() { } );
-        countDownLabel.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                super.componentResized(e);
-                int sec = 60;
-                sec--;
-                countDownLabel.setText("60"+sec);
+            });*/
 
 
-                    }
 
-                });}
 
 
 
@@ -110,6 +136,9 @@ public class Game {
 
     }
 
+
+
+
     //compares your choice and comp choice to see who wins
     //0 = water , 1 = fire , 2 = nature
     //0 counters 1 , 1 counters 2 , 2 counters 0
@@ -118,39 +147,51 @@ public class Game {
 
         if(myChoice == computerChoice)
         {
-            JOptionPane.showMessageDialog(null, "Tie");
+            JOptionPane.showMessageDialog(null, "Tie! You earned 0 point from this fight !");
+            gamePlayed+=0;
         }
         //My choice is water
         else if(myChoice == 0 && computerChoice == 1)
         {
-            JOptionPane.showMessageDialog(null, "Win");
+            JOptionPane.showMessageDialog(null, "Win ! You earned 1 point from this fight ! ");
+            gamePlayed+=1;
+
         }
         else if(myChoice == 0 && computerChoice == 2)
         {
-            JOptionPane.showMessageDialog(null, "Lose");
+            JOptionPane.showMessageDialog(null, "Lose ! Computer earned 1 point from this fight !");
+            gamePlayed+=0;
         }
         //My choice is Fire
         else if(myChoice == 1 && computerChoice == 0)
         {
-            JOptionPane.showMessageDialog(null, "Lose");
+            JOptionPane.showMessageDialog(null, "Lose ! Computer earned 1 point from this fight !");
+            gamePlayed+=0;
         }
         else if(myChoice == 1 && computerChoice == 2)
         {
-            JOptionPane.showMessageDialog(null, "Win");
+            JOptionPane.showMessageDialog(null, "Win ! You earned 1 point from this fight ! ");
+            gamePlayed+=1;
         }
         //My choice is Nature
         else if(myChoice == 2 && computerChoice == 1)
         {
-            JOptionPane.showMessageDialog(null, "Lose");
+            JOptionPane.showMessageDialog(null, "Lose ! Computer earned 1 point from this fight !");
+            gamePlayed+=0;
         }
         else if(myChoice == 2 && computerChoice == 0)
         {
-            JOptionPane.showMessageDialog(null, "Win");
+            JOptionPane.showMessageDialog(null, "Win ! You earned 1 point from this fight ! ");
+            gamePlayed+=1;
         }
 
 
 
     }
 
-
+     //Display when the times of game played reached 5 times
+           public void GameResult(){
+             JOptionPane.showMessageDialog(null,"You win this time");
+             System.exit(0);
+           }
 }

@@ -10,7 +10,7 @@ public class MainMenu {
     private JButton startButton;
     private JButton gameRecordButton;
 
-    public MainMenu() {
+    public  MainMenu() {
         JFrame frame = new JFrame("Main Menu");
         ///// mainMenu IS ALWAYS NULL WITHOUT THE NEXT LINE!!!
         frame.setContentPane(this.mainMenu);
@@ -36,11 +36,7 @@ public class MainMenu {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                Game gameStart = new Game();
-
-
-
+                       Game gameStart = new Game();
             }
         });
         gameRecordButton.addActionListener(new ActionListener() {
@@ -50,6 +46,8 @@ public class MainMenu {
                 GameRecord gameRecord = new GameRecord();
             }
         });
+
+
     }
 
     public void tutorial(){

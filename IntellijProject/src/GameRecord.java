@@ -13,5 +13,7 @@ public class GameRecord {
     frame.setMinimumSize(new Dimension(500, 500));
     frame.pack();
     frame.setVisible(true);
+
+    //Store the played game data maximum 5 history
 }
 }
