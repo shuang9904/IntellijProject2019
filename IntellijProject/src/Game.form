@@ -55,7 +55,7 @@
         <properties>
           <font size="20"/>
           <foreground color="-5432064"/>
-          <text value="Time left 60 seconds"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="b32c0" class="javax.swing.JLabel" binding="computerScore">

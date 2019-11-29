@@ -11,7 +11,7 @@ public class Game {
     private JButton Water;
     private JButton Nature;
     private JButton Fire;
-    private JLabel countDownLabel;
+    private JLabel countDownLabel = new JLabel("", SwingConstants.CENTER);
     private JLabel computerScore;
     private int myChoice;
     private int computerChoice;
@@ -24,6 +24,10 @@ public class Game {
         frame.setMinimumSize(new Dimension(500, 500));
         frame.pack();
         frame.setVisible(true);
+        JPanel introSouthPanel = new JPanel();
+        introSouthPanel.add(new JLabel("Status:"));
+        introSouthPanel.add(countDownLabel);
+
 
                   //if the times of game played is more than 5 times , execute the following code
                    if (gamePlayed >= 5) {
@@ -194,4 +198,38 @@ public class Game {
              JOptionPane.showMessageDialog(null,"You win this time");
              System.exit(0);
            }
+
+           public void countDownLabel(String text) {//count down
+
+
+           }
+       }
+class HurdlerTimer {
+    private static final int TIMER_PERIOD = 1000; //seconds
+    protected static final int MAX_COUNT = 60;  //Set timer
+    private Game welcome; // holds a reference to the Welcome class
+    private int count;
+
+    public HurdlerTimer(Game welcome) {
+        this.welcome = welcome; // initializes the reference to the Welcome class.
+        String text = "(" + (MAX_COUNT - count) + ") seconds left";
+        welcome.countDownLabel(text);
+    }
+
+    public void start() {
+        new Timer(TIMER_PERIOD, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (count < MAX_COUNT) {
+                    count++;
+                    String text = "(" + (MAX_COUNT - count) + ") seconds left";
+                    welcome.countDownLabel(text); // uses the reference to Welcome
+                } else {
+                    ((Timer) e.getSource()).stop();
+                    welcome.GameResult();
+                }
+            }
+        }).start();
+    }
+
 }
