@@ -13,16 +13,16 @@ public class Game {
     private JLabel computerScore;
     private int myChoice;
     private int computerChoice;
-    private static int gamePlayed=0;
+    private static int gamePlayed=0; //Store the score you earned
 
     public Game()  {
-        //gamePlayed = 0; //store the times of game played
+
         JFrame frame = new JFrame("The Elements");
         frame.setContentPane(this.Game);
         frame.setMinimumSize(new Dimension(500, 500));
         frame.pack();
         frame.setVisible(true);
-        //Game.add(countDownLabel);
+
         new HurdlerTimer(this).start();
 
                   //if the times of game played is more than 5 times , execute the following code
