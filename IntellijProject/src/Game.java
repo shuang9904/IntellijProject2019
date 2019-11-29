@@ -1,33 +1,29 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.Array;
-import java.util.Random;
 
 
-       //This is the main game
+//This is the main game
 public class Game {
     private JPanel Game;
     private JButton Water;
     private JButton Nature;
     private JButton Fire;
-    private JLabel countDownLabel = new JLabel("", SwingConstants.CENTER);
+    private JLabel countDownLabel;
     private JLabel computerScore;
     private int myChoice;
     private int computerChoice;
-            int gamePlayed = 0; //store the times of game played
+    private static int gamePlayed=0;
 
-
-    public Game() {
+    public Game()  {
+        //gamePlayed = 0; //store the times of game played
         JFrame frame = new JFrame("The Elements");
         frame.setContentPane(this.Game);
         frame.setMinimumSize(new Dimension(500, 500));
         frame.pack();
         frame.setVisible(true);
-        JPanel introSouthPanel = new JPanel();
-        introSouthPanel.add(new JLabel("Status:"));
-        introSouthPanel.add(countDownLabel);
-
+        //Game.add(countDownLabel);
+        new HurdlerTimer(this).start();
 
                   //if the times of game played is more than 5 times , execute the following code
                    if (gamePlayed >= 5) {
@@ -50,9 +46,8 @@ public class Game {
                                {
                                    myChoice = 0;
                                    computerChoice = computerPlays();
-                                   conditionsDisplayResults( myChoice, computerChoice );
-
-
+                                   conditionsAndDisplayResults( myChoice, computerChoice );
+                                   System.out.println(gamePlayed);
                                }
                            }
                        } );
@@ -69,7 +64,7 @@ public class Game {
                                {
                                    myChoice = 1;
                                    computerChoice = computerPlays();
-                                   conditionsDisplayResults( myChoice, computerChoice );
+                                   conditionsAndDisplayResults( myChoice, computerChoice );
 
                                }
                            }
@@ -86,7 +81,7 @@ public class Game {
                                {
                                    myChoice = 2;
                                    computerChoice = computerPlays();
-                                   conditionsDisplayResults( myChoice, computerChoice );
+                                   conditionsAndDisplayResults( myChoice, computerChoice );
 
                                }
 
@@ -103,52 +98,16 @@ public class Game {
 
                    }*/
     }
-            /*Game.addContainerListener(new ContainerAdapter() {
-            });
-            countDownLabel.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    super.componentResized(e);
-                    int sec = 60;
-                    sec--;
-                    countDownLabel.setText("60" + sec);
 
+           //Setting count down
+           public void setCountDownLabelText(String text) {
+               countDownLabel.setText(text);
+           }
 
-                }
-
-            });*/
-
-
-
-
-
-
-
-    //computer chooses
-    static int computerPlays() {
-        int choice;
-
-        choice = (int)(Math.random() * 3);
-        if(choice == 0)
-        JOptionPane.showMessageDialog(null,"Computer chose Water");
-        if(choice == 1)
-            JOptionPane.showMessageDialog(null,"Computer chose Fire");
-        if(choice == 2)
-            JOptionPane.showMessageDialog(null,"Computer chose Nature");
-
-        return choice;
-
-    }
-
-
-
-
-    //compares your choice and comp choice to see who wins
-    //0 = water , 1 = fire , 2 = nature
-    //0 counters 1 , 1 counters 2 , 2 counters 0
-    public void conditionsDisplayResults(int myChoice, int computerChoice){
-//
-
+    public void conditionsAndDisplayResults(int myChoice, int computerChoice){
+      //compares your choice and comp choice to see who wins
+        //0 = water , 1 = fire , 2 = nature
+        //0 counters 1 , 1 counters 2 , 2 counters 0
         if(myChoice == computerChoice)
         {
             JOptionPane.showMessageDialog(null, "Tie! You earned 0 point from this fight !");
@@ -188,10 +147,21 @@ public class Game {
             JOptionPane.showMessageDialog(null, "Win ! You earned 1 point from this fight ! ");
             gamePlayed+=1;
         }
-
-
-
     }
+    static int computerPlays() {
+               int choice;
+
+               choice = (int)(Math.random() * 3);
+               if(choice == 0)
+                   JOptionPane.showMessageDialog(null,"Computer chose Water");
+               if(choice == 1)
+                   JOptionPane.showMessageDialog(null,"Computer chose Fire");
+               if(choice == 2)
+                   JOptionPane.showMessageDialog(null,"Computer chose Nature");
+
+               return choice;
+
+           }
 
      //Display when the times of game played reached 5 times
            public void GameResult(){
@@ -199,21 +169,18 @@ public class Game {
              System.exit(0);
            }
 
-           public void countDownLabel(String text) {//count down
-
-
-           }
        }
+//Timer
 class HurdlerTimer {
-    private static final int TIMER_PERIOD = 1000; //seconds
-    protected static final int MAX_COUNT = 60;  //Set timer
+    private static final int TIMER_PERIOD = 1000;
+    protected static final int MAX_COUNT = 60;
     private Game welcome; // holds a reference to the Welcome class
     private int count;
 
     public HurdlerTimer(Game welcome) {
         this.welcome = welcome; // initializes the reference to the Welcome class.
-        String text = "(" + (MAX_COUNT - count) + ") seconds left";
-        welcome.countDownLabel(text);
+        String text = "Time: " + (MAX_COUNT - count) + " sec";
+        welcome.setCountDownLabelText(text);
     }
 
     public void start() {
@@ -222,14 +189,18 @@ class HurdlerTimer {
             public void actionPerformed(ActionEvent e) {
                 if (count < MAX_COUNT) {
                     count++;
-                    String text = "(" + (MAX_COUNT - count) + ") seconds left";
-                    welcome.countDownLabel(text); // uses the reference to Welcome
+                    String text = "Time: " + (MAX_COUNT - count) + " sec";
+                    welcome.setCountDownLabelText(text); // uses the reference to Welcome
                 } else {
                     ((Timer) e.getSource()).stop();
-                    welcome.GameResult();
+                    Game newGame = new Game();
                 }
             }
         }).start();
     }
 
 }
+
+
+
+

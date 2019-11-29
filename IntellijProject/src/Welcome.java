@@ -1,4 +1,4 @@
-import java.awt.BorderLayout;
+/*import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-
+//https://stackoverflow.com/questions/6811064/jlabel-displaying-countdown-java
 public class Welcome extends JPanel {
     private static final String INTRO = "intro";
     private static final String USED_BEFORE = "used before";
@@ -24,13 +24,15 @@ public class Welcome extends JPanel {
         introPanel.add(new JLabel("WELCOME", SwingConstants.CENTER), BorderLayout.CENTER);
         introPanel.add(introSouthPanel, BorderLayout.SOUTH);
 
-
+        JPanel usedBeforePanel = new JPanel(new BorderLayout());
+        usedBeforePanel.setBackground(Color.pink);
+        usedBeforePanel.add(new JLabel("Used Before", SwingConstants.CENTER));
 
         setLayout(cardLayout);
         add(introPanel, INTRO);
+        add(usedBeforePanel, USED_BEFORE);
 
-
-        //new HurdlerTimer(this).start();
+        new HurdlerTimer(this).start();
     }
 
     private static void createAndShowUI() {
@@ -59,7 +61,7 @@ public class Welcome extends JPanel {
     }
 }
 
-/*class HurdlerTimer {
+class HurdlerTimer {
     private static final int TIMER_PERIOD = 1000;
     protected static final int MAX_COUNT = 10;
     private Welcome welcome; // holds a reference to the Welcome class
@@ -87,7 +89,6 @@ public class Welcome extends JPanel {
         }).start();
     }
 
-}*/
-
-
+}
+*/
 
