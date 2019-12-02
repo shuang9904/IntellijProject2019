@@ -35,15 +35,18 @@ public class MainMenu {
         });
         startButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                       Game gameStart = new Game();
+            public void actionPerformed(ActionEvent e)
+            {
+
+                 new Game();
+
             }
         });
         gameRecordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                GameRecord gameRecord = new GameRecord();
+                new GameRecord();
             }
         });
 

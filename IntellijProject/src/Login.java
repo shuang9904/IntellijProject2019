@@ -44,7 +44,7 @@ public class Login {
 
         else //If select cancel will proceed to the Main menu
         {
-         MainMenu mainMenu = new MainMenu();
+         new MainMenu();
         }
 
 

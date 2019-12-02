@@ -2,36 +2,50 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
 //This is the main game
 public class Game {
+
     private JPanel Game;
     private JButton Water;
     private JButton Nature;
     private JButton Fire;
     private JLabel countDownLabel;
-    private JLabel computerScore;
+    private JLabel Player;
+    private JLabel Computer;
     private int myChoice;
     private int computerChoice;
-    private static int gamePlayed=0; //Store the score you earned
+    private static int playerScore=0; //Store the score you earned
+    private static int computerScore =0;//Store the score computer earned
 
+
+
+    //Display when the times of game played reached 5 times
+    public void GameResult(){
+        JOptionPane.showMessageDialog(null,"You win this time");
+
+    }
     public Game()  {
 
-        JFrame frame = new JFrame("The Elements");
-        frame.setContentPane(this.Game);
-        frame.setMinimumSize(new Dimension(500, 500));
-        frame.pack();
-        frame.setVisible(true);
+        JFrame gameFrame = new JFrame("The Elements");
+        gameFrame.setContentPane(this.Game);
+        gameFrame.setMinimumSize(new Dimension(500, 500));
+        gameFrame.pack();
+        gameFrame.setVisible(true);
+
 
         new HurdlerTimer(this).start();
 
+
+
                   //if the times of game played is more than 5 times , execute the following code
-                   if (gamePlayed >= 5) {
+                   if (playerScore >= 5|| computerScore >=5) {
                        GameResult();
-                       MainMenu mainMenu = new MainMenu();
+                       gameFrame.dispose();
+                        new MainMenu();
                    }
 
-                   else{
+                   else if(playerScore <= 5|| computerScore <=5)
+                       {
                        Water.addActionListener( new ActionListener()
                        {
                            @Override
@@ -47,7 +61,7 @@ public class Game {
                                    myChoice = 0;
                                    computerChoice = computerPlays();
                                    conditionsAndDisplayResults( myChoice, computerChoice );
-                                   System.out.println(gamePlayed);
+                                   System.out.println(playerScore);
                                }
                            }
                        } );
@@ -91,18 +105,26 @@ public class Game {
 
 
 
-                   /*else{ //else which when the times of game played is more than 5 times , execute the following code
 
-                       GameResult();
-                       MainMenu mainMenu = new MainMenu();
 
-                   }*/
     }
 
-           //Setting count down
-           public void setCountDownLabelText(String text) {
-               countDownLabel.setText(text);
-           }
+               //Setting count down
+               public void setCountDownLabelText(String text)
+               {
+                   countDownLabel.setText(text);
+               }
+               public void setPlayerLabelText(String text)
+               {
+                    Player.add(new JLabel("Player:" + playerScore));
+                }
+               public void setComputerLabelText(String text)
+               {
+                  Computer.add(new JLabel("Computer" + computerScore));
+               }
+
+
+
 
     public void conditionsAndDisplayResults(int myChoice, int computerChoice){
       //compares your choice and comp choice to see who wins
@@ -111,41 +133,48 @@ public class Game {
         if(myChoice == computerChoice)
         {
             JOptionPane.showMessageDialog(null, "Tie! You earned 0 point from this fight !");
-            gamePlayed+=0;
+            playerScore+=0;
+            computerScore +=0;
         }
         //My choice is water
         else if(myChoice == 0 && computerChoice == 1)
         {
             JOptionPane.showMessageDialog(null, "Win ! You earned 1 point from this fight ! ");
-            gamePlayed+=1;
+            playerScore+=1;
+            computerScore +=0;
 
         }
         else if(myChoice == 0 && computerChoice == 2)
         {
             JOptionPane.showMessageDialog(null, "Lose ! Computer earned 1 point from this fight !");
-            gamePlayed+=0;
+            playerScore+=0;
+            computerScore +=1;
         }
         //My choice is Fire
         else if(myChoice == 1 && computerChoice == 0)
         {
             JOptionPane.showMessageDialog(null, "Lose ! Computer earned 1 point from this fight !");
-            gamePlayed+=0;
+            playerScore+=0;
+            computerScore +=1;
         }
         else if(myChoice == 1 && computerChoice == 2)
         {
             JOptionPane.showMessageDialog(null, "Win ! You earned 1 point from this fight ! ");
-            gamePlayed+=1;
+            playerScore+=1;
+            computerScore +=0;
         }
         //My choice is Nature
         else if(myChoice == 2 && computerChoice == 1)
         {
             JOptionPane.showMessageDialog(null, "Lose ! Computer earned 1 point from this fight !");
-            gamePlayed+=0;
+            playerScore+=0;
+            computerScore +=1;
         }
         else if(myChoice == 2 && computerChoice == 0)
         {
             JOptionPane.showMessageDialog(null, "Win ! You earned 1 point from this fight ! ");
-            gamePlayed+=1;
+            playerScore+=1;
+            computerScore +=0;
         }
     }
     static int computerPlays() {
@@ -163,37 +192,39 @@ public class Game {
 
            }
 
-     //Display when the times of game played reached 5 times
-           public void GameResult(){
-             JOptionPane.showMessageDialog(null,"You win this time");
-             System.exit(0);
-           }
+
 
        }
 //Timer
 class HurdlerTimer {
     private static final int TIMER_PERIOD = 1000;
     protected static final int MAX_COUNT = 60;
-    private Game welcome; // holds a reference to the Welcome class
+    private Game timer; // holds a reference to the timer class
     private int count;
 
-    public HurdlerTimer(Game welcome) {
-        this.welcome = welcome; // initializes the reference to the Welcome class.
+    public HurdlerTimer(Game timer) {
+        this.timer = timer; // initializes the reference to the timer class.
         String text = "Time: " + (MAX_COUNT - count) + " sec";
-        welcome.setCountDownLabelText(text);
+        timer.setCountDownLabelText(text);
     }
 
     public void start() {
+
         new Timer(TIMER_PERIOD, new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (count < MAX_COUNT) {
                     count++;
                     String text = "Time: " + (MAX_COUNT - count) + " sec";
-                    welcome.setCountDownLabelText(text); // uses the reference to Welcome
+                    timer.setCountDownLabelText(text); // uses the reference to timer
                 } else {
                     ((Timer) e.getSource()).stop();
-                    Game newGame = new Game();
+                    JOptionPane.showMessageDialog(null,"Going back to Main Menu","Error",JOptionPane.ERROR_MESSAGE );
+                    new MainMenu();
+
+
+                    //Close the Game GUI after the timer stops
                 }
             }
         }).start();
