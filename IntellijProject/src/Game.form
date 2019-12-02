@@ -58,24 +58,24 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="f040d" class="javax.swing.JLabel" binding="Player">
+      <component id="f040d" class="javax.swing.JLabel" binding="Computer">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
           <foreground color="-5432064"/>
-          <text value="h"/>
+          <text value=""/>
         </properties>
       </component>
-      <component id="9e589" class="javax.swing.JLabel" binding="Computer">
+      <component id="9e589" class="javax.swing.JLabel" binding="Player">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
           <foreground color="-5432064"/>
-          <text value="h"/>
+          <text value=""/>
         </properties>
       </component>
     </children>

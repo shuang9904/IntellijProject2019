@@ -1,11 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-//This is the main java
-//Loads the Main menu Form
-//Loads the Game GUI
-//Loads the Game Record GUI
+/*This is the main program where connects everything
+The program is based on Rock paper scissors concept
+You start the game right here */
 
 
 public class Login {
@@ -17,6 +15,7 @@ public class Login {
         userName = JOptionPane.showInputDialog(null,
                 "Please enter your username","Welcome",
                 JOptionPane.INFORMATION_MESSAGE);
+        //Validates
         //make sure the username that user enter is more than 3 characters
         //make sure the username has to be unique no duplicate
         while(userName.length() < 3 || userName.length()>25)
@@ -38,17 +37,12 @@ public class Login {
             MainMenu callTutorial = new MainMenu();
             callTutorial.tutorial();
 
-
-
         }
-
-        else //If select cancel will proceed to the Main menu
+        //If select cancel will proceed to the Main menu
+        else
         {
          new MainMenu();
         }
-
-
-
 
     }
 

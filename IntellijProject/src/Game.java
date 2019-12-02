@@ -2,7 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//This is the main game
+//This is the GUI when you click on start from Menu
+
 public class Game {
 
     private JPanel Game;
@@ -19,11 +20,12 @@ public class Game {
 
 
 
-    //Display when the times of game played reached 5 times
+    //Display when computer score 3 times or player score 3 times
     public void GameResult(){
         JOptionPane.showMessageDialog(null,"You win this time");
-
+        new MainMenu();
     }
+
     public Game()  {
 
         JFrame gameFrame = new JFrame("The Elements");
@@ -32,19 +34,20 @@ public class Game {
         gameFrame.pack();
         gameFrame.setVisible(true);
 
-
+        //The timer
         new HurdlerTimer(this).start();
+        setComputerLabelText();
+        setPlayerLabelText();
 
 
-
-                  //if the times of game played is more than 5 times , execute the following code
-                   if (playerScore >= 5|| computerScore >=5) {
+                  //if computer score 3 marks or player score 3 marks, close the game , open the menu
+                   if (playerScore >= 3|| computerScore >=3) {
                        GameResult();
                        gameFrame.dispose();
                         new MainMenu();
                    }
-
-                   else if(playerScore <= 5|| computerScore <=5)
+                   //else if the player score less than 3 marks, keep executing the game
+                   else if(playerScore <= 3|| computerScore <=3)
                        {
                        Water.addActionListener( new ActionListener()
                        {
@@ -61,7 +64,6 @@ public class Game {
                                    myChoice = 0;
                                    computerChoice = computerPlays();
                                    conditionsAndDisplayResults( myChoice, computerChoice );
-                                   System.out.println(playerScore);
                                }
                            }
                        } );
@@ -79,7 +81,6 @@ public class Game {
                                    myChoice = 1;
                                    computerChoice = computerPlays();
                                    conditionsAndDisplayResults( myChoice, computerChoice );
-
                                }
                            }
                        } );
@@ -96,17 +97,9 @@ public class Game {
                                    myChoice = 2;
                                    computerChoice = computerPlays();
                                    conditionsAndDisplayResults( myChoice, computerChoice );
-
                                }
-
-
                            }
                        } );}
-
-
-
-
-
     }
 
                //Setting count down
@@ -114,20 +107,20 @@ public class Game {
                {
                    countDownLabel.setText(text);
                }
-               public void setPlayerLabelText(String text)
+               //Setting Player's score
+               public void setPlayerLabelText()
                {
-                    Player.add(new JLabel("Player:" + playerScore));
+                   Player.setText(String.valueOf(playerScore));
                 }
-               public void setComputerLabelText(String text)
+                //Setting Computer's score
+               public void setComputerLabelText()
                {
-                  Computer.add(new JLabel("Computer" + computerScore));
+                   Computer.setText(String.valueOf(computerScore));
                }
 
 
-
-
     public void conditionsAndDisplayResults(int myChoice, int computerChoice){
-      //compares your choice and comp choice to see who wins
+         //compares your choice and comp choice to see who wins
         //0 = water , 1 = fire , 2 = nature
         //0 counters 1 , 1 counters 2 , 2 counters 0
         if(myChoice == computerChoice)
@@ -195,7 +188,7 @@ public class Game {
 
 
        }
-//Timer
+//Timer ,reference from https://stackoverflow.com/questions/6811064/jlabel-displaying-countdown-java
 class HurdlerTimer {
     private static final int TIMER_PERIOD = 1000;
     protected static final int MAX_COUNT = 60;
@@ -222,9 +215,9 @@ class HurdlerTimer {
                     ((Timer) e.getSource()).stop();
                     JOptionPane.showMessageDialog(null,"Going back to Main Menu","Error",JOptionPane.ERROR_MESSAGE );
                     new MainMenu();
-
-
                     //Close the Game GUI after the timer stops
+                    //I tried different ways such as setVisible,dispose() ,etc, but still I can't figure it out
+
                 }
             }
         }).start();
