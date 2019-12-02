@@ -40,6 +40,7 @@ public class MainMenu {
             public void actionPerformed(ActionEvent e)
             {
                  new Game();
+                 //dispose();
             }
         });
 
@@ -49,6 +50,7 @@ public class MainMenu {
             public void actionPerformed(ActionEvent e)
             {
                 new GameRecord();
+                frame.dispose();
             }
         });
 

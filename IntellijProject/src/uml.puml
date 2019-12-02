@@ -1,0 +1,25 @@
+@startuml
+
+class Login
+{
+-userName :String
+-tutorial :int
+--
++mainMenu()
+}
+
+
+
+
+
+
+
+
+class MainMenu{
+}
+
+
+
+
+@enduml
+

@@ -33,7 +33,7 @@ public class Game {
         gameFrame.setMinimumSize(new Dimension(500, 500));
         gameFrame.pack();
         gameFrame.setVisible(true);
-
+        gameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //The timer
         new HurdlerTimer(this).start();
         setComputerLabelText();
@@ -189,7 +189,7 @@ public class Game {
 
        }
 //Timer ,reference from https://stackoverflow.com/questions/6811064/jlabel-displaying-countdown-java
-class HurdlerTimer {
+class HurdlerTimer extends Game {
     private static final int TIMER_PERIOD = 1000;
     protected static final int MAX_COUNT = 60;
     private Game timer; // holds a reference to the timer class
